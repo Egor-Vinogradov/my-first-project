@@ -1,0 +1,57 @@
+<div class="container" *ngIf="!loading">
+  <form #weighingForm>
+    <br>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col"></th>
+<!--        <th scope="col">Значение</th>-->
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="row">
+          <div class="align-middle col">
+            Дата, <mark>*</mark>
+          </div>
+          <div class="col">
+            <input type="date" [(ngModel)]="dateDefault" name="dateDefault"
+                   placeholder="dd/mm/yyyy"
+                   (ngModelChange)="setDate($event)"
+                   [value]="dateDefault"
+                   class="form-control" required #creationDateValid="ngModel">
+            <div class="alert alert-secondary py-2 px-3" [hidden]="creationDateValid.valid || creationDateValid.pristine">
+              Поле обязательно для заполнения!!!
+            </div>
+          </div>
+          <div class="align-middle col">
+            Вес, кг<mark>*</mark>
+          </div>
+          <div class="col">
+            <input type="number" [(ngModel)]="weighing.weight" name="weight"
+                   placeholder="Введите вес..."
+                   class="form-control" required #weightValid="ngModel">
+            <div class="alert alert-secondary py-2 px-3" [hidden]="weightValid.valid || weightValid.pristine">
+              Поле обязательно для заполнения!!!
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <br>
+    <div class="btn-group">
+      <div *ngIf="creationDateValid.valid && weightValid.valid">
+        <button type="submit" class="btn btn-outline-secondary"
+                (click)="addWeighing(weighing)">Добавить</button>
+      </div>
+      <div *ngIf="creationDateValid.invalid || weightValid.invalid">
+        <button type="button" class="btn btn-outline-secondary" disabled>Добавить</button>
+      </div>
+      <button type="button" (click)="cleanForm();weighingForm.reset()" class="btn btn-secondary">Очистить</button>
+    </div>
+  </form>
+</div>
+
+<p class="container" *ngIf="loading">Загрузка...</p>
+

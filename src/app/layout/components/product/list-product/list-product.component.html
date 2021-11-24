@@ -1,0 +1,92 @@
+<app-filter (emitter)="inputSearch($event)"></app-filter>
+<div class="container" *ngIf="!loading">
+  <div *ngIf="products.length; else noProduct">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col-8">Название продукта</th>
+          <th scope="col">Название бренда</th>
+          <th scope="col">Калории</th>
+          <th scope="col">Белки</th>
+          <th scope="col">Жиры</th>
+          <th scope="col">Углеводы</th>
+          <th scope="col">Мера веса</th>
+          <th scope="col" *ngIf="admin">Удаление</th>
+          <th scope="col" *ngIf="admin">Редактировать</th>
+        </tr>
+      </thead>
+      <tbody class="myClass">
+      <tr *ngFor="let product of products; let i = index">
+        <th scope="row" class="align-middle">{{ product.id }}</th>
+        <td  class="align-middle">
+          <div class="row">
+            <input type="text" class="form-control-sm col-lg-10"
+                   [(ngModel)]="product.name" name="name"
+                   value="{{ product.name }}" [disabled]="!admin">
+          </div>
+        </td>
+        <td  class="align-middle">
+          <div class="row">
+            <input type="text" class="form-control-sm col-lg-8"
+                   [(ngModel)]="product.brand" name="brand"
+                   value="{{ product.brand }}" [disabled]="!admin">
+          </div>
+        </td>
+        <td  class="align-middle">
+          <div class="row justify-content-between">
+            <input type="number" class="form-control-sm col-lg-7"
+                   [(ngModel)]="product.calories" name="calories"
+                   value="{{ product.calories }}" [disabled]="!admin">
+          </div>
+        </td>
+        <td  class="align-middle justify-content-between">
+          <div class="row">
+            <input type="number" class="form-control-sm col-lg-7"
+                   [(ngModel)]="product.protein" name="protein"
+                   value="{{ product.protein }}" [disabled]="!admin">
+          </div>
+        </td>
+        <td  class="align-middle justify-content-between">
+          <div class="row">
+            <input type="number" class="form-control-sm col-lg-7"
+                   [(ngModel)]="product.fats" name="fats"
+                   value="{{ product.fats }}" [disabled]="!admin">
+          </div>
+        </td>
+        <td  class="align-middle justify-content-between">
+          <div class="row">
+            <input type="number" class="form-control-sm col-lg-7"
+                   [(ngModel)]="product.carbohydrates" name="carbohydrates"
+                   value="{{ product.carbohydrates }}" [disabled]="!admin">
+          </div>
+        </td>
+        <td  class="align-middle justify-content-between">
+          <div class="row">
+            <input type="number" class="form-control-sm col-lg-7"
+                   [(ngModel)]="product.measure" name="measure"
+                   value="{{ product.measure }}" [disabled]="!admin">
+          </div>
+        </td>
+        <td>
+          <button *ngIf="admin" class="btn btn-secondary btn-sm"
+                  (click)="removeProduct(product.id)">Удалить</button>
+        </td>
+        <td>
+          <button *ngIf="admin" class="btn btn-secondary btn-sm"
+                  (click)="updateProduct(product)">Сохранить</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <app-pagination (emitter)="inputSearchSize($event)"
+                    (emitterPage)="inputPage($event)"
+                    [allItems]="allPage"></app-pagination>
+  </div>
+</div>
+
+<ng-template #noProduct>
+  <p class="р2" style="text-align: center"><strong>Нет продуктов совсем!!!</strong></p>
+</ng-template>
+
+<p class="container" *ngIf="loading">Загрузка...</p>

@@ -1,0 +1,41 @@
+<div class="container">
+  <ul class="pagination justify-content-end">
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ amountCount }}
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" (click)="installAmountCount(5)">5</a></li>
+        <li><a class="dropdown-item" (click)="installAmountCount(10)">10</a></li>
+        <li><a class="dropdown-item" (click)="installAmountCount(15)">15</a></li>
+        <li><a class="dropdown-item" (click)="installAmountCount(20)">20</a></li>
+        <li><a class="dropdown-item" (click)="installAmountCount(50)">50</a></li>
+<!--        <li><hr class="dropdown-divider"></li>-->
+<!--        <li><a class="dropdown-item" (click)="amountCount = 'Все';installAmountCount(maxNumber - 1)">Все</a></li>-->
+      </ul>
+    </div>
+    <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+      <a class="page-link text-dark" (click)="setPage(1)" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+      <a class="page-link text-dark" (click)="setPage(pager.currentPage - 1)" aria-label="Previous">
+        <span aria-hidden="true">&lt;</span>
+      </a>
+    </li>
+    <li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+      <a class="page-link text-dark" (click)="setPage(page)">{{ page }}</a>
+    </li>
+    <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+      <a class="page-link text-dark" (click)="setPage(pager.currentPage + 1)" aria-label="Next">
+        <span aria-hidden="true">&gt;</span>
+      </a>
+    </li>
+    <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+      <a class="page-link text-dark" (click)="setPage(pager.totalPages)" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</div>

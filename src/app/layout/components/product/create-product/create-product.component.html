@@ -1,0 +1,93 @@
+<h2 class="р4 mt-3" style="text-align: center"><strong>Создание нового продукта</strong></h2>
+<div class="container" *ngIf="!loading">
+  <form #productForm>
+    <div class="form-group">
+      <br>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Наименование</th>
+          <th scope="col">Значение</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td  class="align-middle">Название продукта, <mark>*</mark></td>
+            <td>
+              <input type="text" [(ngModel)]="product.name" name="product" placeholder="Введите название продукта..."
+                     class="form-control" required #productValid="ngModel">
+              <div class="alert alert-secondary py-2 px-3" [hidden]="productValid.valid || productValid.pristine">
+                Название продукта обязательно для заполнения!!!
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td  class="align-middle">Бренд, <mark>*</mark></td>
+            <td>
+              <input type="text" [(ngModel)]="product.brand" name="brand" placeholder="Введите название бренда..."
+                     class="form-control" required #brandValid="ngModel">
+              <div class="alert alert-secondary py-2 px-3" [hidden]="brandValid.valid || brandValid.pristine">
+                Название бренда обязательно для заполнения!!!
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">Белки</td>
+            <td>
+              <input type="number" [(ngModel)]="product.protein" name="protein" placeholder="Введите количество белков..."
+                     class="form-control">
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">Жиры</td>
+            <td>
+              <input type="number" [(ngModel)]="product.fats" name="fats" placeholder="Введите количество жиров..."
+                     class="form-control">
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">Углеводы</td>
+            <td>
+              <input type="number" [(ngModel)]="product.carbohydrates" name="carbohydrates" placeholder="Введите количество углеводов..."
+                     class="form-control">
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">Калорийность, <mark>*</mark></td>
+            <td>
+              <input type="number" [(ngModel)]="product.calories" name="calories" placeholder="Введите калорийность..."
+                     class="form-control" required #caloriesValid="ngModel">
+              <div class="alert alert-secondary py-2 px-3" [hidden]="caloriesValid.valid || caloriesValid.pristine">
+                Калориность обязательна для заполнения!!!
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">Мера, г<mark>*</mark></td>
+            <td>
+              <input type="number" [(ngModel)]="product.measure" name="measure" placeholder="Введите меру веса..."
+                     class="form-control" required #measureValid="ngModel">
+              <div class="alert alert-secondary py-2 px-3" [hidden]="measureValid.valid || measureValid.pristine">
+                Мера веса обязательна для заполнения!!!
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <div class="btn-group">
+        <div *ngIf="productValid.valid && brandValid.valid && measureValid.valid && caloriesValid.valid">
+          <button type="submit" class="btn btn-outline-secondary"
+                  (click)="addProduct(product)">Добавить</button>
+        </div>
+        <div *ngIf="productValid.invalid || brandValid.invalid || measureValid.invalid || caloriesValid.invalid">
+          <button type="button" class="btn btn-outline-secondary" disabled>Добавить</button>
+        </div>
+        <button type="button" (click)="cleanForm();productForm.reset()" class="btn btn-secondary">Очистить</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<p class="container" *ngIf="loading">Загрузка...</p>
+

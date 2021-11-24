@@ -1,0 +1,4 @@
+.pagination>li.active>a {
+  background: dimgrey;
+  color: #fff;
+}

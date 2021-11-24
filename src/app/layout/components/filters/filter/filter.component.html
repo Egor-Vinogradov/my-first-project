@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-3">
+    <form>
+      <input class="form-control" type="text"
+             placeholder="Поиск..."
+             aria-label="Search"
+             name="name"
+             [(ngModel)]="name"
+             (input)="inputSearch(name)"
+      >
+    </form>
+  </div>
+</div>
+

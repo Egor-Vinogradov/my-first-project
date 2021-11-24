@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-3">
+    <form>
+      <select class="form-select form-select-sm"
+              [(ngModel)]="login" name="login" (ngModelChange)="inputSearch($event)">
+        <option *ngFor="let user of users" [value]="user.login"> {{ user.login }}</option>
+      </select>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<h2 class="р4 mt-3" style="text-align: center"><strong>Регистрация</strong></h2>
+<div class="container" *ngIf="!loading">
+  <form #registrationForm>
+    <br>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Наименование</th>
+        <th scope="col">Значение</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td  class="align-middle">Имя, <mark>*</mark></td>
+        <td>
+          <input type="email" [(ngModel)]="user.name" name="name" placeholder="Введите имя пользователя..."
+                 class="form-control" required #nameValid="ngModel">
+          <div class="alert alert-secondary py-2 px-3" [hidden]="nameValid.valid || nameValid.pristine">
+            Поле обязательно для заполнения!!!
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td  class="align-middle">E-mail, <mark>*</mark></td>
+        <td>
+          <input type="email" [(ngModel)]="user.login" name="login" placeholder="Введите e-mail..."
+                 class="form-control" required #loginValid="ngModel">
+          <div class="alert alert-secondary py-2 px-3" [hidden]="loginValid.valid || loginValid.pristine">
+            Поле обязательно для заполнения!!!
+          </div>
+          <div class="alert alert-danger py-2 px-3" *ngIf="!emailChek">
+            Не корректный e-mail
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td  class="align-middle">Пароль, <mark>*</mark></td>
+        <td>
+          <input type="password" [(ngModel)]="user.password" name="password" placeholder="Введите пароль..."
+                 class="form-control" required #passwordValid="ngModel">
+          <div class="alert alert-secondary py-2 px-3" [hidden]="passwordValid.valid || passwordValid.pristine">
+            Поле обязательно для заполнения!!!
+          </div>
+        </td>
+      </tr>
+      <tr>
+      </tbody>
+    </table>
+    <br>
+    <div class="btn-group">
+      <div *ngIf="loginValid.valid && passwordValid.valid && nameValid.valid">
+        <button type="submit" class="btn btn-outline-secondary"
+                (click)="registration(user)">Регистрация</button>
+      </div>
+      <div *ngIf="loginValid.invalid || passwordValid.invalid || nameValid.invalid">
+        <button type="button" class="btn btn-outline-secondary" disabled>Регистрация</button>
+      </div>
+      <button type="button" (click)="cleanForm();registrationForm.reset()" class="btn btn-secondary">Очистить</button>
+      <button type="button" (click)="return()" class="btn btn-primary">Авторизация</button>
+    </div>
+  </form>
+</div>

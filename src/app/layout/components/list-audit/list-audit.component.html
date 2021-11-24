@@ -1,0 +1,40 @@
+<app-filter-login (emitter)="inputSearch($event)" *ngIf="admin"></app-filter-login>
+<div class="container" *ngIf="!loading">
+  <div class="table-sm" *ngIf="audits.length; else noProduct">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Пользователь</th>
+        <th scope="col">Логин</th>
+        <th scope="col">Содержание операции</th>
+        <th scope="col">Название сущности</th>
+        <th scope="col">Тип операции</th>
+        <th scope="col">Дата изменения</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let audit of audits; let i = index">
+        <th scope="row" class="align-middle">{{ audit.id }}</th>
+        <td  class="align-middle">{{ audit.user.name }}</td>
+        <td  class="align-middle">{{ audit.user.login }}</td>
+        <td  class="align-middle">{{ audit.description }}</td>
+        <td  class="align-middle">{{ audit.essenceName }}</td>
+        <td  class="align-middle">{{ audit.typeAudit }}</td>
+        <!--        <td  class="align-middle">{{ user.status }}</td>-->
+        <td  class="align-middle">{{ audit.creationDate | date: 'dd-MM-yyyy HH:mm' }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <app-pagination (emitter)="inputSearchSize($event)"
+                    (emitterPage)="inputPage($event)"
+                    [allItems]="allPage"></app-pagination>
+  </div>
+</div>
+
+<ng-template #noProduct>
+  <p class="р2" style="text-align: center"><strong>Список действий отсутсвует!!!</strong></p>
+</ng-template>
+
+<p class="container" *ngIf="loading">Загрузка...</p>
+

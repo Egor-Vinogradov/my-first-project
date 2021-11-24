@@ -1,0 +1,46 @@
+<app-filter (emitter)="inputSearch($event)"></app-filter>
+<div class="container" *ngIf="!loading">
+  <div class="table-sm" *ngIf="users.length; else noProduct">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Логин</th>
+        <th scope="col">Роль</th>
+        <th scope="col">Статус</th>
+        <th scope="col">Дата создания</th>
+        <th scope="col">Дата обновления</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <th scope="row" class="align-middle">{{ user.id }}</th>
+        <td  class="align-middle">{{ user.name }}</td>
+        <td  class="align-middle">{{ user.login }}</td>
+        <td  class="align-middle">{{ user.role }}</td>
+<!--        <td  class="align-middle">{{ user.status }}</td>-->
+        <td>
+          <select class="form-select form-select-sm"
+                  [(ngModel)]="user.status" (ngModelChange)="selectStatus($event);updateUser(user)"
+                  aria-label=".form-select-sm example">
+            <option *ngFor="let status of userStatus" [value]="status">{{ status }}</option>
+          </select>
+        </td>
+        <td  class="align-middle">{{ user.creationDate | date: 'dd-MM-yyyy HH:mm' }}</td>
+        <td  class="align-middle">{{ user.updateDate | date: 'dd-MM-yyyy HH:mm' }}</td>
+<!--        <app-card-user></app-card-user>-->
+      </tr>
+      </tbody>
+    </table>
+    <app-pagination (emitter)="inputSearchSize($event)"
+                    (emitterPage)="inputPage($event)"
+                    [allItems]="allPage"></app-pagination>
+  </div>
+</div>
+
+<ng-template #noProduct>
+  <p class="р2" style="text-align: center"><strong>Нет продуктов совсем!!!</strong></p>
+</ng-template>
+
+<p class="container" *ngIf="loading">Загрузка...</p>

@@ -1,0 +1,88 @@
+<div class="flex-shrink-0 p-3 bg-light" style="width: 280px">
+  <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+    <svg class="bi me-2" width="30" height="50"><use xlink:href="#bootstrap"/></svg>
+    <span class="fs-5 fw-bolder">Hello, {{ userName }}!!!</span>
+  </a>
+  <ul class="list-unstyled ps-0">
+    <li class="mb-1">
+      <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
+        Продукт
+      </button>
+      <div class="collapse mx-3" id="home-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li><a class="link-dark rounded" (click)="createProductActive()">Создать новый</a></li>
+          <li><a class="link-dark rounded" (click)="listProductActive()">Список продуктов</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="mb-1">
+      <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+        Блюдо
+      </button>
+      <div class="collapse mx-3" id="dashboard-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li><a href="#" class="link-dark rounded">Создать новое</a></li>
+          <li><a class="link-dark rounded" (click)="fetchProductList()">Список блюд</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="mb-1">
+      <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+        Дневник питания
+      </button>
+      <div class="collapse mx-3" id="orders-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li><a href="#" class="link-dark rounded">Добавить запись</a></li>
+          <li><a href="#" class="link-dark rounded">Дневник</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="mb-1">
+      <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#weighting-collapse" aria-expanded="false">
+        Дневник взвешивания
+      </button>
+      <div class="collapse mx-3" id="weighting-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li><a (click)="weighingActive()" class="link-dark rounded">Дневник</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="mb-1">
+      <button class="btn btn-toggle align-items-center rounded collapsed"
+              data-bs-toggle="collapse" data-bs-target="#users-collapse"
+              *ngIf="usersAdmin" aria-expanded="false">
+        Пользователи
+      </button>
+      <div class="collapse mx-3" id="users-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li><a (click)="listUsersActive()" class="link-dark rounded">Список пользователей</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="mb-1">
+      <button class="btn btn-toggle align-items-center rounded collapsed"
+              data-bs-toggle="collapse" data-bs-target="#audit-collapse"
+              aria-expanded="false">
+        Аудит
+      </button>
+      <div class="collapse mx-3" id="audit-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li><a (click)="listAuditActive()" class="link-dark rounded">Список действий</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="border-top my-3"></li>
+    <li class="mb-1">
+      <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+        Аккаунт
+      </button>
+      <div class="collapse mx-5" id="account-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li><a (click)="profilePage()" class="link-dark rounded">Профиль</a></li>
+          <li><a href="#" class="link-dark rounded">Настройки</a></li>
+          <li><a href="#" class="link-dark rounded" (click)="logOut()">Выход</a></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>

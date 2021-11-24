@@ -1,0 +1,48 @@
+<h3 class="р4 mt-3" style="text-align: center"><strong>Дневник взвешиваний пользователя {{ name }}</strong></h3>
+<div class="container" *ngIf="!loading">
+  <div *ngIf="weighings.length; else noWeighing">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col-8">Дата</th>
+          <th scope="col">Вес</th>
+          <th scope="col">Удалить</th>
+          <th scope="col">Сохранить</th>
+        </tr>
+      </thead>
+      <tbody class="myClass">
+      <tr *ngFor="let weighing of weighings; let i = index">
+        <th scope="row" class="align-middle">{{ weighing.id }}</th>
+        <td  class="align-middle">{{ weighing.creationDate | date: 'dd-MM-yyyy' }}</td>
+        <td  class="align-middle">
+          <div class="row">
+            <input type="number" class="form-control-sm col-lg-8"
+                   [(ngModel)]="weighing.weight" name="weight"
+                   value="{{ weighing.weight }}">
+          </div>
+        </td>
+        <td>
+          <button *ngIf="admin" class="btn btn-secondary btn-sm"
+                  (click)="removeWeighing(weighing.id)">Удалить</button>
+        </td>
+        <td>
+          <button *ngIf="admin" class="btn btn-secondary btn-sm"
+                  (click)="updateWeighing(weighing)">Сохранить</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <app-pagination (emitter)="inputSearchSize($event)"
+                    (emitterPage)="inputPage($event)"
+                    [allItems]="allPage"></app-pagination>
+  </div>
+</div>
+
+<ng-template #noWeighing>
+  <p class="р2" style="text-align: center"><strong>Нет взвешиваний совсем!!!</strong></p>
+</ng-template>
+
+<p class="container" *ngIf="loading">Загрузка...</p>
+
+<app-weighing-create (emitter)="updatePage()"></app-weighing-create>

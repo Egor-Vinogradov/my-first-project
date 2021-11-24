@@ -1,0 +1,95 @@
+<h2 class="р4 mt-3" style="text-align: center"><strong>Профиль пользователя {{ user.name }}</strong></h2>
+<div class="container" *ngIf="!loading">
+  <form #profileForm>
+    <div class="form-group">
+      <br>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Наименование</th>
+          <th scope="col">Значение</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td  class="align-middle">Имя пользователя</td>
+          <td>
+            <input type="text" [(ngModel)]="user.name" name="name"
+                   class="form-control">
+          </td>
+        </tr>
+        <tr>
+          <td  class="align-middle">Дата рождения</td>
+          <td>
+            <input type="date" [(ngModel)]="dateOfBirth" name="dateOfBirth"
+                   (ngModelChange)="dateUpdate($event)"
+                   placeholder="dd/mm/yyyy"
+                   class="form-control">
+          </td>
+        </tr>
+        <tr>
+          <td class="align-middle">Пол</td>
+          <td>
+            <select class="form-select form-select-sm"
+                    [(ngModel)]="profile.sex" (ngModelChange)="selectSex($event)"
+                    aria-label=".form-select-sm example" name="sex">
+              <option *ngFor="let sex1 of sex" [value]="sex1">{{ sex1 }}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="align-middle">Активность</td>
+          <td>
+            <select class="form-select form-select-sm"
+                    [(ngModel)]="profile.activity" (ngModelChange)="selectActivity($event)"
+                    aria-label=".form-select-sm example" name="activity">
+              <option *ngFor="let activity of profileActivity" [value]="activity">{{ activity }}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="align-middle">Цель</td>
+          <td>
+            <select class="form-select form-select-sm"
+                    [(ngModel)]="profile.target" (ngModelChange)="selectTarget($event)"
+                    aria-label=".form-select-sm example" name="target">
+              <option *ngFor="let target of profileTarget" [value]="target">{{ target }}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="align-middle">Текущий вес</td>
+          <td>
+            <input type="number" [(ngModel)]="profile.weight" name="weght"
+                   class="form-control">
+        </tr>
+        <tr>
+          <td class="align-middle">Целевой вес</td>
+          <td>
+            <input type="number" [(ngModel)]="profile.targetWeight" name="targetWeight"
+                   class="form-control">
+          </td>
+        </tr>
+        <tr>
+          <td class="align-middle">Рост</td>
+          <td>
+            <input type="number" [(ngModel)]="profile.height" name="height"
+                   class="form-control">
+        </tr>
+        </tbody>
+      </table>
+      <br>
+      <div class="btn-group">
+        <div>
+          <button type="submit" class="btn btn-outline-secondary"
+                  (click)="updateProfile(profile)">Сохранить</button>
+        </div>
+        <button type="button" (click)="cleanForm();profileForm.reset()" class="btn btn-secondary">Очистить</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<p class="container" *ngIf="loading">Загрузка...</p>
+
+
